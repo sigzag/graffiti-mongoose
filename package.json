@@ -59,7 +59,7 @@
     "sinon-chai": "2.8.0"
   },
   "pre-commit": [
-    "test",
+    "test"
     // "eslint"
   ]
 }
