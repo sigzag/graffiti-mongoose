@@ -241,9 +241,10 @@ function getType(graffitiModels, { name, description, fields }, path = [], rootT
       const nestedObjectName = getTypeFieldName(graphQLType.name, name);
       graphQLField.type = getType(graffitiModels, { name: nestedObjectName, description, fields }, newPath, rootType);
     } else if (type === 'Embedded') {
+      const nestedObjectName = getTypeFieldName(graphQLType.name, name);
       const type = types.hasOwnProperty(name)
         ? types[name]
-        : getType(graffitiModels, embeddedModel, ['embedded']);
+        : getType(graffitiModels, { ...embeddedModel, name: nestedObjectName }, ['embedded']);
       type.mongooseEmbedded = true;
       graphQLField.type = type;
     } else if (enumValues && type === 'String') {
