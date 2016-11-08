@@ -110,6 +110,15 @@ function getList(Collection, selector, options = {}, context, info = null) {
     };
   }
 
+  for (let index of Collection.schema.indexes()) {
+    const name = Object.keys(index[0])[0];
+    if (selector.hasOwnProperty(name)) {
+      const path = Collection.schema.path(name);
+      if (path.instance === 'ObjectID')
+        selector[name] = processId({ id: selector[name] });
+    }
+  }
+
   const projection = getFieldList(info);
   return Collection.find(selector, projection, options).then((result) => (
     result.map((value) => ({

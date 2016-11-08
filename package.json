@@ -60,6 +60,5 @@
   },
   "pre-commit": [
     "test"
-    // "eslint"
   ]
 }

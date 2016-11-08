@@ -165,6 +165,10 @@ function getArguments(type, args = {}) {
       args[field.name] = field;
     }
 
+    if (field.type instanceof GraphQLObjectType) {
+      args[field.name] = { ...field, type: GraphQLID };
+    }
+
     return args;
   }, {
     ...args,
